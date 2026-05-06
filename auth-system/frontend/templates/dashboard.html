@@ -1,0 +1,39 @@
+<section class="dashboard-canvas">
+  <div class="dashboard-grid">
+    <div class="dashboard-panel">
+      <h1 class="panel-title">Session Information</h1>
+
+      <dl class="session-list">
+        <div>
+          <dt>Status:</dt>
+          <dd class="status-text">{{ dashboard.tokenStatus }}</dd>
+        </div>
+        <div>
+          <dt>Role:</dt>
+          <dd>User</dd>
+        </div>
+        <div>
+          <dt>Token Expiry:</dt>
+          <dd>{{ dashboard.tokenExpiry }}</dd>
+        </div>
+      </dl>
+
+      <div class="button-row">
+        <button class="action-button secondary" type="button" ng-click="dashboard.checkStatus()">Check Status</button>
+        <button class="action-button primary" type="button" ng-click="dashboard.refreshData()">Refresh Token</button>
+      </div>
+    </div>
+
+    <div class="dashboard-panel">
+      <h2 class="panel-title">Protected Data</h2>
+
+      <div class="alert-strip" ng-if="dashboard.loading">Loading protected data...</div>
+      <div class="alert-strip danger" ng-if="dashboard.error">{{ dashboard.error }}</div>
+      <div class="alert-strip" ng-if="dashboard.data && !dashboard.loading">
+        Welcome to the protected dashboard!
+      </div>
+
+      <pre class="code-block" ng-if="dashboard.data">{{ dashboard.protectedJson }}</pre>
+    </div>
+  </div>
+</section>
