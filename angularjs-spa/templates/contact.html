@@ -1,0 +1,129 @@
+<section class="container py-5">
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <p class="text-uppercase text-primary fw-semibold small mb-2">Contact</p>
+      <h1 class="h2 fw-bold">Validated contact form</h1>
+      <p class="text-muted">
+        AngularJS tracks field state, displays validation feedback, and stores submitted form data
+        in the controller.
+      </p>
+
+      <div class="alert alert-success" ng-if="contact.successMessage">
+        {{ contact.successMessage }}
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <form name="contactForm" class="panel" ng-submit="contact.submitForm(contactForm)" novalidate>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            id="name"
+            name="name"
+            class="form-control"
+            ng-class="{ 'is-invalid': contactForm.name.$touched && contactForm.name.$invalid }"
+            type="text"
+            ng-model="contact.formData.name"
+            required
+            minlength="2"
+          >
+          <div class="invalid-feedback" ng-if="contactForm.name.$touched && contactForm.name.$error.required">
+            Name is required.
+          </div>
+          <div class="invalid-feedback" ng-if="contactForm.name.$touched && contactForm.name.$error.minlength">
+            Name must be at least 2 characters.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            id="email"
+            name="email"
+            class="form-control"
+            ng-class="{ 'is-invalid': contactForm.email.$touched && contactForm.email.$invalid }"
+            type="email"
+            ng-model="contact.formData.email"
+            required
+          >
+          <div class="invalid-feedback" ng-if="contactForm.email.$touched && contactForm.email.$error.required">
+            Email is required.
+          </div>
+          <div class="invalid-feedback" ng-if="contactForm.email.$touched && contactForm.email.$error.email">
+            Enter a valid email address.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="topic" class="form-label">Topic</label>
+          <select
+            id="topic"
+            name="topic"
+            class="form-select"
+            ng-class="{ 'is-invalid': contactForm.topic.$touched && contactForm.topic.$invalid }"
+            ng-model="contact.formData.topic"
+            required
+          >
+            <option value="">Choose a topic</option>
+            <option value="Admissions">Admissions</option>
+            <option value="Support">Support</option>
+            <option value="Feedback">Feedback</option>
+          </select>
+          <div class="invalid-feedback" ng-if="contactForm.topic.$touched && contactForm.topic.$invalid">
+            Choose a topic.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            class="form-control"
+            ng-class="{ 'is-invalid': contactForm.message.$touched && contactForm.message.$invalid }"
+            rows="4"
+            ng-model="contact.formData.message"
+            required
+            minlength="10"
+          ></textarea>
+          <div class="invalid-feedback" ng-if="contactForm.message.$touched && contactForm.message.$error.required">
+            Message is required.
+          </div>
+          <div class="invalid-feedback" ng-if="contactForm.message.$touched && contactForm.message.$error.minlength">
+            Message must be at least 10 characters.
+          </div>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row mt-4" ng-if="contact.submissions.length">
+    <div class="col-12">
+      <div class="panel">
+        <h2 class="h5 mb-3">Submitted Data</h2>
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Topic</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="submission in contact.submissions">
+                <td>{{ submission.name }}</td>
+                <td>{{ submission.email }}</td>
+                <td>{{ submission.topic }}</td>
+                <td>{{ submission.message }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

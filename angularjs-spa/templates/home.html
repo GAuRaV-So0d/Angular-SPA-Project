@@ -1,0 +1,37 @@
+<section class="container py-5">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <p class="text-uppercase text-primary fw-semibold small mb-2">Home</p>
+      <h1 class="display-5 fw-bold">AngularJS SPA starter</h1>
+      <p class="lead text-muted">
+        A compact single page application with navigation, routing, data binding, validation,
+        and a responsive Bootstrap interface.
+      </p>
+    </div>
+    <div class="col-lg-5">
+      <div class="panel">
+        <h2 class="h5 mb-3">Two-way Data Binding</h2>
+        <label for="studentName" class="form-label">Student name</label>
+        <input id="studentName" class="form-control mb-3" type="text" ng-model="home.studentName">
+
+        <label for="program" class="form-label">Program</label>
+        <select id="program" class="form-select mb-3" ng-model="home.selectedProgram" ng-options="program for program in home.programs"></select>
+
+        <div class="binding-preview">
+          <span class="text-muted">Live preview</span>
+          <strong>{{ home.studentName || 'Student name' }}</strong>
+          <span>{{ home.selectedProgram }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-4">
+    <div class="col-md-4" ng-repeat="stat in home.quickStats">
+      <div class="stat-card">
+        <span>{{ stat.label }}</span>
+        <strong>{{ stat.value }}</strong>
+      </div>
+    </div>
+  </div>
+</section>
